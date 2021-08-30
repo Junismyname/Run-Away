@@ -67,7 +67,7 @@ class Background:
    
 # This class, player, is used to create the object player which is what the user controls in the game
 class player:
-    #
+    # This function initializes the image of the player and also gives the player a secondary image for when the player is in flight. This code also provides instructions for the player's default image
   def __init__(self, x = 50, y = 160):
 
     self.player_flying = pygame.transform.scale(pygame.image.load(os.path.join("assets","sprite1flight.png")),(20,20)).convert()
@@ -83,7 +83,7 @@ class player:
     jumping = -22
 
     self.player.move_ip(0, 12)
-    #
+    # This aspect of the code tells the program what to do if a specific key is pressed and also tells the code whether to change the player's image or not
     keys = pygame.key.get_pressed()
     if self.player.top > 10:
       if keys[pygame.K_UP]:
@@ -107,7 +107,7 @@ class player:
       if keys[pygame.K_RIGHT]:
         stepsize = 760 - self.player.right
   
-   # 
+   # Puts the character into the screen
   def rendering(self):
     screen.blit(self.player_pic, self.player)
 
@@ -115,6 +115,8 @@ class player:
     # Monsters
 
     # Real obstacles
+
+# This class describes the various obstacles and monsters that the player sprite must avoid collisions with
 class Object:
   def __init__(self):
     self.Barricade = []
@@ -122,12 +124,14 @@ class Object:
     self.Barricade.append(ground)
 
   def monsters(self,monster):
-      monster_list = [pygame.Rect(random.randint(73,78)*10, random.randint(0,8)*40,40,40),pygame.Rect(random.randint(0,1)*40,random.randint(-10,-1)*10,40,40),pygame.Rect(random.randint(0,17)*40,random.randint(37,42)*10,40,40)]
+      monster_list = [pygame.Rect(730, random.randint(0,8)*40,40,40),pygame.Rect(random.randint(0,17)*40,-10,40,40),pygame.Rect(random.randint(0,17)*40,370,40,40)]
       return monster_list[random.randint(0,2)]
 
+# Create a block that the character can stand on
   def blocks(self):
     for Barricade in self.Barricade:
       pygame.draw.rect(screen, (0,0,0), Barricade)
+
   
   def collision(self):
     index = player.collidelist(self.Barricade)
@@ -154,11 +158,11 @@ Monsters_top = []
 monster_normal = pygame.transform.scale(pygame.image.load(os.path.join("assets","monster1.png")),(40,40)).convert()
 for Monster in range(15):
   monster = objects.monsters(Monster)
-  if monster.x in range(730,781) and monster.y in range(0,361):
+  if monster.x == 730 and monster.y in range(0,361):
     Monsters_right.append(monster)
-  elif monster.x in range(0,721) and monster.y in range(-10,-101):
+  elif monster.x in range(0,721) and monster.y == -10:
     Monsters_top.append(monster)
-  elif monster.x in range(0,721) and monster.y in range(370, 420):
+  elif monster.x in range(0,721) and monster.y == 370:
     Monsters_bottom.append(monster)
 print(Monsters_right,"\n", Monsters_top, "\n", Monsters_bottom)
 
