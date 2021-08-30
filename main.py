@@ -26,7 +26,7 @@ import random
 
 # This class is for creating the object Background which is comprised of the image for the background of the game and the starting screen that players first encounter
 class Background:
-    # This function provides the information for the classs to create the background and access the background image
+    # This function provides the information for the classs to create the background, there are two images created, and access the background image
   def __init__(self,width,height):
     self.bg_pic = pygame.image.load(os.path.join("assets", "dot_grid.jpg")).convert()
     self.bg = pygame.Rect(0,0,width,360)
@@ -34,7 +34,7 @@ class Background:
     self.x_axis1 = 0
     self.x_axis2 = self.width
   
-  #
+  # This function sets two values equal to the background images to slowly move the background
   def updating(self):
     self.x_axis1 -= 2 
     self.x_axis2 -= 2
